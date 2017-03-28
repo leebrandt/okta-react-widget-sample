@@ -1,27 +1,3 @@
-Simple React Project Using Okta SignIn Widget
-==
-
-Start by cloning the simple react seed project
---
-
-```bash
-git clone git https://github.com/leebrandt/simple-react-seed.git okta-react-widget-sample
-cd okta-react-widget-sample
-npm install
-npm start
-```
-
-Then add the Okta SignIn Widget
---
-There is a known bug in the newest version of the signin widget, so we'll use version 1.6.0
-
-```bash
-npm install @okta/okta-signin-widget@1.6.0 --save
-```
-
-Finally, we'll add the LoginPage component
---
-```js
 import React from 'react';
 import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
 import '@okta/okta-signin-widget/dist/css/okta-theme.css';
@@ -89,4 +65,3 @@ export default class LoginPage extends React.Component{
     );
   }
 }
-```
