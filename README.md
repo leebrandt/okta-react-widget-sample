@@ -13,10 +13,10 @@ npm start
 
 Then add the Okta SignIn Widget
 --
-There is a known bug in the newest version of the signin widget, so we'll use version 1.6.0
+to install the newest version of the signin widget:
 
 ```bash
-npm install @okta/okta-signin-widget@1.6.0 --save
+npm install @okta/okta-signin-widget --save
 ```
 
 Finally, we'll add the LoginPage component
