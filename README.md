@@ -5,7 +5,7 @@ Start by cloning the simple react seed project
 --
 
 ```bash
-git clone git https://github.com/leebrandt/simple-react-seed.git okta-react-widget-sample
+git clone https://github.com/leebrandt/simple-react-seed.git okta-react-widget-sample
 cd okta-react-widget-sample
 npm install
 npm start
@@ -32,8 +32,8 @@ export default class LoginPage extends React.Component{
     super();
     this.state = { user: null };
     this.widget = new OktaSignIn({
-      baseUrl: 'https://dev-997102.oktapreview.com',
-      clientId: '4W70TiB8idkMkhVlY1KG',
+      baseUrl: 'https://dev-[dev id].oktapreview.com',
+      clientId: '[client id]',
       redirectUri: 'http://localhost:3000',
       authParams: {
         responseType: 'id_token'
