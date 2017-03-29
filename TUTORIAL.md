@@ -108,6 +108,7 @@ import OktaSignIn from '@okta/okta-signin-widget';
 export default class LoginPage extends React.Component{
   constructor(){
     super();
+    this.state = {user:null};
     this.widget = new OktaSignIn({
       baseUrl: 'https://dev-[dev id].oktapreview.com',
       clientId: '[client id]',
@@ -136,9 +137,10 @@ export default class LoginPage extends React.Component{
   }
 }
 ```
+We also added state to our component. If you're using a flux implementation, this would naturally come from the app state. But to keep this tutorial simple, we'll let our little `LoginPage` keep track of it's own state.
 
-## Putting It All Together
-Now, we'll add some stuff to check to make sure the user isn't already logged in, and we'll move our `renderEl` out to a function called `showLogin`. 
+## Check If The User Is Logged In
+We don't necessarily want to render the widget right away. We'll need to add some code to check to make sure the user isn't already logged in, and we'll move our `renderEl` out to a function called `showLogin`. 
 
 ```js
  // ...other stuff removed for brevity's sake
@@ -164,7 +166,12 @@ Now, we'll add some stuff to check to make sure the user isn't already logged in
     );
   }
 ```
+>*You might have noticed a weird bit of code in that `showLogin` method. That first line: `Backbone.history.stop()`. The widget itself uses [Backbone.js]() to navigate between its own screens (login, forgot password, etc.), and when it renders, it starts the `Backbone.history`. Since we've now moved it out into a `showLogin` function, we're going to re-render the widget whenever the function is called. So this is just a little trick to tell Backbone to stop the history, because we're going to restart it when we render the widget.*
 
+## Putting It All Together
+Let's wrap this up. We'll make sure we bind the class's `this` context to each of our methods. We Added a `logout` method, and we changed our `render` method to make a decision on what to render, based on whether there is a currently logged in user.
+
+So our final `LoginPage.js` should look like this.
 
 ```js
 import React from 'react';
@@ -233,3 +240,24 @@ export default class LoginPage extends React.Component{
   }
 }
 ```
+
+## Checking It Out
+When we run the app now (with `npm start`), we should see something like this:
+
+![Finished Sample](static/Finished-Sample-Screener.gif)
+
+If it works - congrats! If it doesn't, please post a question to Stack Overflow with an [okta tag](http://stackoverflow.com/questions/tagged/okta), or hit me up [on Twitter](https://twitter.com/leebrandt).
+
+## Known Issues
+
+There is one known issue in this tutorial. The widget's CSS takes over the whole page and will override your app's CSS. This is a [documented issue](https://github.com/okta/okta-signin-widget/issues/126) and you can see [Matt Raible's comment on it](https://github.com/okta)
+
+## React + Okta
+
+You can find a completed version of the application created in this blog post [on GitHub](https://github.com/leebrandt/okta-react-widget-sample). 
+
+Building authentication in an application is hard. It’s even less fun to build it over and over again in each application you build. Okta does the hard part for you and makes it a lot more fun to be a developer! Sign up for a forever-free developer account and try Okta today!
+
+I hope you’ve enjoyed this quick tour of our React support. If you have questions about Okta’s features, or what we’re building next, please hit me up [on Twitter](https://twitter.com/leebrandt), leave a comment below, or open an issue on GitHub. 
+
+
