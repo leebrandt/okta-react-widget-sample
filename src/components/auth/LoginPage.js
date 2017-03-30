@@ -27,7 +27,7 @@ export default class LoginPage extends React.Component{
 
   showLogin(){
     Backbone.history.stop();
-    this.widget.renderEl({el:'#okta-login-container'}, 
+    this.widget.renderEl({el:this.loginContainer}, 
       (response) => {
         this.setState({user: response.claims.email});
       },
@@ -54,7 +54,7 @@ export default class LoginPage extends React.Component{
           </div>
         ) : null}
         {this.state.user ? null : (
-          <div id="okta-login-container" className="login" />
+          <div ref={(div) => {this.loginContainer = div; }} />
         )}
       </div>
     );
