@@ -41,15 +41,17 @@ module.exports = {
     ]
   },
   output: {
-    path: path.join(__dirname, 'src'),
+    path: path.join(__dirname, 'build'),
     filename: '[name].bundle.js',
     publicPath: '/',
     sourceMapFilename: '[file].map'
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'src'),
     port: 3000,
     filename: '[app].bundle.js',
+    compress: true,
     historyApiFallback: true
   }
 };
