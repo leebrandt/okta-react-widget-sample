@@ -129,6 +129,7 @@ export default class LoginPage extends React.Component{
     this.widget.renderEl({el:'#okta-login-container'},
       (response) => {
         this.setState({user: response.claims.email});
+        this.widget.remove();
       },
       (err) => {
         console.log(err);
@@ -164,6 +165,7 @@ You don't necessarily want to render the widget right away. You'll need to add a
     this.widget.renderEl({el:'#okta-login-container'},
       (response) => {
         this.setState({user: response.claims.email});
+        this.widget.remove();
       },
       (err) => {
         console.log(err);
@@ -202,6 +204,7 @@ export default class LoginPage extends React.Component{
     this.widget.session.get((response) => {
       if(response.status !== 'INACTIVE'){
         this.setState({user:response.login});
+        this.widget.remove();
       }else{
         this.showLogin();
       }
